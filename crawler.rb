@@ -1,5 +1,6 @@
 # coding: utf-8
 require 'octokit'
+require 'csv'
 
 # Crawler class for GitHub
 #
@@ -107,7 +108,7 @@ class Crawler
     # @param [Array<Hash>] commits An array of hash which returned by parse_commits
     def puts_file(commits)
       commits.each do |commit|
-        @file.puts "#{commit[:repo]}, #{commit[:sha]}, #{commit[:message]}"
+        @file.puts [commit[:repo], commit[:sha], commit[:message]].to_csv
       end
     end
 
