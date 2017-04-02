@@ -4,3 +4,14 @@ services:
     build: .
     volumes:
       - .:/work
+  elasticsearch:
+    build: container/elasticsearch
+    environment:
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ports:
+      - 9200:9200
+      - 9300:9300
+  elasticsearch-head:
+    image: mobz/elasticsearch-head:5
+    ports:
+      - 9100:9100
