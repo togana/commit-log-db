@@ -3,4 +3,4 @@ services:
   embulk:
     build: .
     volumes:
-      - .:/wark
+      - .:/work
