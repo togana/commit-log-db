@@ -6,9 +6,8 @@ in:
     newline: LF
     type: csv
     delimiter: ','
-    quote: null
-    trim_if_not_quoted: false
-    skip_header_lines: 1
+    quote: '"'
+    skip_header_lines: 0
     allow_extra_columns: false
     allow_optional_columns: false
     columns:
