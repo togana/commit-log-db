@@ -4,14 +4,16 @@ services:
     build: .
     volumes:
       - .:/work
-  elasticsearch:
-    build: container/elasticsearch
+  mysql:
+    image: mysql:5.6.35
+    env_file: .env
     environment:
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      MYSQL_DATABASE: commit-log
     ports:
-      - 9200:9200
-      - 9300:9300
-  elasticsearch-head:
-    image: mobz/elasticsearch-head:5
-    ports:
-      - 9100:9100
+      - '3306:3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+volumes:
+  mysql-data:
+    driver: local
