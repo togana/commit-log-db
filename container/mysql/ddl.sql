@@ -6,5 +6,5 @@ CREATE TABLE `bulk_tbl` (
   `sha` char(40) NOT NULL DEFAULT '',
   `message` text,
   PRIMARY KEY (`sha`),
-  KEY `test` (`message`(3))
+  FULLTEXT KEY `fulltext-message` (`message`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
