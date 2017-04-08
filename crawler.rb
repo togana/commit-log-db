@@ -138,7 +138,7 @@ access_token = ENV['GITHUBAPI_ACCESS_TOKEN']
 raise "GITHUBAPI_ACCESS_TOKEN must be exported !!" if access_token.nil?
 
 # results file name
-filename = "commits.txt"
+filename = "commits.csv"
 
 # Open file for results
 File.open(filename, "w") do |file|
