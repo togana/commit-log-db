@@ -1,7 +1,0 @@
-http.host: 0.0.0.0
-http.cors.enabled: "true"
-http.cors.allow-origin: "*"
-http.cors.allow-headers: Authorization
-
-# transport.host: 0.0.0.0
-discovery.zen.minimum_master_nodes: 1

@@ -2,17 +2,17 @@ version: '3'
 services: 
   embulk:
     build: .
+    env_file: .env
     volumes:
       - .:/work
   mysql:
     image: mysql:5.6.35
     env_file: .env
-    environment:
-      MYSQL_DATABASE: commit-log
     ports:
       - '3306:3306'
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./container/mysql:/docker-entrypoint-initdb.d
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
 volumes:
   mysql-data:

@@ -14,4 +14,15 @@ in:
     - {name: repo, type: string}
     - {name: sha, type: string}
     - {name: 'message', type: string}
-out: {type: stdout}
+out:
+  type: mysql
+  host: mysql
+  user: root
+  password: {{ env.MYSQL_ROOT_PASSWORD }}
+  database: 'commit-log'
+  table: bulk_tbl
+  mode: truncate_insert
+  column_options:
+      repo: {type: 'VARCHAR(255)'}
+      sha: {type: 'CHAR(40)'}
+      message: {type: 'TEXT'}
