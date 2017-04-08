@@ -6,7 +6,7 @@ RUN curl -L https://dl.bintray.com/embulk/maven/embulk-${EMBULK_VERSION}.jar -o 
     chmod +x /usr/local/embulk
 
 WORKDIR /work
-RUN /usr/local/embulk gem install embulk-output-elasticsearch
+RUN /usr/local/embulk gem install embulk-output-mysql
 COPY . /work
 ENTRYPOINT ["java", "-jar", "/usr/local/embulk"]
 CMD ["--help"]
