@@ -1,5 +1,6 @@
 # coding: utf-8
 require 'octokit'
+require 'parallel'
 require 'csv'
 
 # Crawler class for GitHub
@@ -30,7 +31,7 @@ class Crawler
     puts "Target repositories: #{@repos}"
 
     # crawl for each repository
-    @repos.each { |repo| crawl_repo repo }
+    Parallel.each(@repos, in_threads: 1) { |repo| crawl_repo repo }
   end
 
   private
@@ -55,7 +56,7 @@ class Crawler
     # @param [String] repo Repository full_name such as "minamijoyo/commit_messages"
     def crawl_repo(repo)
       # get commits list on the repository
-      commits_list(repo)
+      commits_list(repo) if repo != 'torvalds/linux'
     end
 
     # Get List of commits
@@ -77,6 +78,8 @@ class Crawler
       # for the next page
       last_response = @client.last_response
       while last_response && last_response.rels[:next]
+        # check the rate limitaion of GitHub API
+        check_rate_limit_and_sleep
         # each page
         last_response = last_response.rels[:next].get
         last_commits = parse_commits(repo, last_response.data)
