@@ -7,15 +7,14 @@ commit-log
 
 `.env.template` をコピーして `.env` を作成する
 
-MYSQL_DATABASEはデータベース名になるのでそのままで問題ないはず
-MYSQL_ROOT_PASSWORDは開発用のMySQLのパスワードになるので任意に指定します
-MYSQL_PWDはMYSQL_ROOT_PASSWORDと同じ値を指定します。ダンプを取得するときに-pコマンドを使用するとワーニングも一緒にダンプしてしまうのを防ぐために指定しています
+MYSQL_DATABASEはデータベース名になるのでそのままで問題ないはず  
+MYSQL_ROOT_PASSWORDは開発用のMySQLのパスワードになるので任意に指定します  
 
-
-GITHUBAPI_ACCESS_TOKENは書きを参考して埋める
+GITHUBAPI_ACCESS_TOKENは下記を参考して埋める  
 https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/
 
-crawler.rbを実行してデータ集め(8時間ぐらいかかった)
+crawler.rbを実行してデータ集め(8時間ぐらいかかった)  
+[参考](http://d.hatena.ne.jp/minamijoyo/20150128)  
 途中でタイムアウトするけど原因わかってない
 
 ```
@@ -42,6 +41,7 @@ $ docker-compose exec mysql mysql -uroot -ppass commit-log -e'ALTER TABLE messag
 ```
 
 SQLダンプ
+
 `$ docker-compose exec mysql sh -c "MYSQL_PWD=pass mysqldump -uroot commit-log --tables messages" | gzip > container/mysql/commit-log.sql.gz`
 
 # ダンプデータを用いたイメージ作成
