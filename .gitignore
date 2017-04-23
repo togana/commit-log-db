@@ -1,3 +1,4 @@
+container/mysql/commit-log.sql.gz
 commits.csv
 logs
 .env
